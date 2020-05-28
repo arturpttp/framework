@@ -1,4 +1,7 @@
+@echo off
 git add *
-var $message
-git commit -m "$message"
-git push -u origin master
+set /p message=Enter commit message: 
+git commit -m "%message%"
+git push
+echo Commit ended, press any key to close. 
+pause >nul
