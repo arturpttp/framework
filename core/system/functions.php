@@ -1,4 +1,6 @@
 <?php
-    //public function here($here = "here") {
-    //    echo "i'm " . ($here == "here" ? $here : "in {$here}");
-    //}
+    function error($error = "Not specified") {
+        $msg = "Error: {$error}";
+        echo "<span class='error center-by-left'>{$msg}</span>";
+        return $msg;
+    }

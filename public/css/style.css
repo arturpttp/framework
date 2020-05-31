@@ -1,0 +1,28 @@
+* {
+    background: #444546;
+}
+
+.content{
+    margin: auto;
+    padding: 0;
+    width: 100%;
+}
+
+.error{
+    border: 15px;
+    padding: 5px;
+    width: 45%;
+    font-size: 18px;
+    background: rgb(255, 12, 17);
+    color: white;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.center-by-left {
+    margin-left: 375px;
+}
+
+.center-by-right {
+    margin-right: 375px;
+}
