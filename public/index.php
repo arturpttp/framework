@@ -1,3 +1,4 @@
+<!--Fundamental stuffs-->
 <link rel="stylesheet" href="css/style.css">
 <?php
     #Initializer

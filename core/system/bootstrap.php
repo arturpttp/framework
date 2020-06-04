@@ -10,3 +10,4 @@
     #Router
     $routes = require_once __DIR__ . "/../../app/routes.php";
     $router = new \Core\Router($routes);
+    $router->run();
