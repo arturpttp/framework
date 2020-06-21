@@ -5,11 +5,14 @@ namespace Core;
 
 
 use Core\Database\Database;
+use Core\Essetials\Controller;
+use Core\Essetials\Model;
+use Illuminate\Support\Facades\DB;
 
 class Container
 {
 
-    public static function newController($controller)
+    public static function newController($controller): Controller
     {
         $objController = "App\\Controllers\\" . $controller;
         if (!class_exists($objController)) {
@@ -19,7 +22,7 @@ class Container
         return new $objController;
     }
 
-    public static function getModel($model)
+    public static function getModel($model): Model
     {
         $objModel = "\\App\\Models\\" . $model;
         if (!class_exists($objModel)) {

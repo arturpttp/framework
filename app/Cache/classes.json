@@ -1,0 +1,1 @@
+{"store":"App\\Repositories\\Stores\\ClassesStore","db":["Core\\Database\\Database","Core\\Database\\DB"],"request":["Core\\Essetials\\Request"],"url":["Core\\Essetials\\Url"],"file":["Core\\Essetials\\File"],"session":["Core\\Essetials\\Session"]}

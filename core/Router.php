@@ -4,17 +4,40 @@
 namespace Core;
 
 
+use App\Models\UserModel;
+use Core\Essetials\Session;
+use Core\Essetials\System;
+use Core\User\User;
+
 class Router
 {
 
     private $routes;
     private $uri;
+    private $app;
+    public static $staticRoutes = [];
+    public static $defaultInfos = [
+        "auth" => false, //true if user need to be logged
+        "level" => 0 //level to access the route User::$levels
+    ];
 
-    public function __construct($routes)
+    public function __construct($routes, $app)
     {
         $this->routes = $routes;
+        foreach (self::$staticRoutes as $route)
+            $this->routes[] = $route;
         $this->uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $this->routeNormalize($this->routes);
+        $this->app = $app;
+    }
+
+    public static function get($route, $data, $auth = false, $level = 0) {
+        $infos = [
+            "auth" => $auth,
+            "level" => $level
+        ];
+        $r = [$route, $data, $infos];
+        return self::$staticRoutes[] = $r;
     }
 
     private function routeNormalize($routes) {
@@ -24,7 +47,7 @@ class Router
             if (isset($route[2])) {
                 $r = [$route[0], $explode[0], $explode[1], $route[2]];
             }else {
-                $r = [$route[0], $explode[0], $explode[1]];
+                $r = [$route[0], $explode[0], $explode[1], self::$defaultInfos];
             }
             $nRoutes[] = $r;
         }
@@ -74,10 +97,13 @@ class Router
                 $found = true;
                 $controller = $route[1];
                 $action = $route[2];
-//                $auth = new Auth;
-//                if(isset($route[3]) && $route[3] == 'auth' && !$auth->check()){
-//                    $action = 'forbiden';
-//                }
+                $infos = $route[3];
+                $userModel = new UserModel();
+                $user = $userModel->find(['id' => Session::get('loggedUser', null)])->first();
+                if ($infos["auth"] == true && !User::isLogged())
+                    $action = 'unLogged';
+                if (User::isLogged() && $user["level"] < $infos["level"])
+                    $action = 'noPermission';
                 break;
             }
         }
@@ -85,6 +111,7 @@ class Router
         if(isset($found)){
             $controllerName = $controller;
             $controller = Container::newController($controller);
+            $controller->app = $this->app;
             if (!method_exists($controller, $action)) {
                 error("method {$action} not found in {$controllerName}");
                 die();

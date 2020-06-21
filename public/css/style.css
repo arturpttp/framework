@@ -8,6 +8,12 @@
     width: 100%;
 }
 
+.has-error {
+    border-color: #a33941;
+    color: #a33941;
+    background: #f1f1f1;
+}
+
 .error{
     border: 15px;
     padding: 5px;

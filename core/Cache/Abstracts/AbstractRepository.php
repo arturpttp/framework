@@ -1,0 +1,127 @@
+<?php
+
+
+namespace Core\Cache\Abstracts;
+
+
+use Closure;
+use Core\Cache\Repository;
+use Core\Cache\Store;
+use Core\Entities\StringUtils;
+
+abstract class AbstractRepository extends AbstractCache implements Repository
+{
+
+    /**
+     * @var AbstractStore|Store|null
+     */
+    private $store = null;
+
+    public function __construct(AbstractStore $store = null, $load = false)
+    {
+        $this->store = $store;
+        if ($store == null)
+            if ($load)
+                $this->load();
+            else
+                error("[{$store}] is undefined on class " . get_class($this));
+        $this->set("store", get_class($store));
+    }
+
+    public function pull($key, $default = null)
+    {
+        $value = $this->get($key, $default);
+        $this->delete($key);
+        return $value;
+    }
+
+    public function put($key, $value)
+    {
+        $this->set($key, $value);
+    }
+
+    public function add($key, $value)
+    {
+        if (!$this->has($key))
+            $this->set($key, $value);
+    }
+
+    public function increment($key, $value = 1)
+    {
+        $initial = $this->pull($key, 0);
+        $newValue = $initial + $value;
+        $this->set($key, $newValue);
+    }
+
+    public function decrement($key, $value = 1)
+    {
+        $initial = $this->pull($key, 0);
+        $newValue = $initial - $value;
+        $this->set($key, $newValue);
+    }
+
+    public function forever($key, $value)
+    {
+        $this->set($key, $value);
+    }
+
+    public function remember($key, Closure $callback)
+    {
+        if ($this->has($key))
+            return $this->get($key);
+        $value = $callback();
+        $this->set($key, $value);
+        return $value;
+    }
+
+    public function sear($key, Closure $callback)
+    {
+        if ($this->has($key))
+            return $this->get($key);
+        $value = $callback();
+        $this->forever($key, $value);
+        return $value;
+    }
+
+    public function rememberForever($key, Closure $callback)
+    {
+        if ($this->has($key))
+            return $this->get($key);
+        $value = $callback();
+        $this->forever($key, $value);
+        return $value;
+    }
+
+    public function forget($key)
+    {
+        $this->delete($key);
+    }
+
+    public function getStore(): Store
+    {
+        return $this->store;
+    }
+
+    public function save()
+    {
+        $jsonString = json_encode($this->items);
+        $fileName = empty($this->getFileName()) || $this->getFileName() == "" ? $this->store->getPrefix() : $this->getFileName();
+        $fileName = (new StringUtils($fileName))->contains(".json") ? (new StringUtils($fileName))->replace(".json", "") : $fileName;
+        $file = fopen(CACHE_PATH . DS . "{$fileName}.json", "w+", false);
+        fwrite($file, $jsonString);
+    }
+
+    public function load()
+    {
+        $fileName = empty($this->getFileName()) || $this->getFileName() == "" ? $this->store->getPrefix() : $this->getFileName();
+        $fileName = (new StringUtils($fileName))->contains(".json") ? (new StringUtils($fileName))->replace(".json", "") : $fileName;
+        $filePath = CACHE_PATH . DS . "{$fileName}.json";
+        $obj = json_decode(file_get_contents($filePath));
+        $items = [];
+        foreach ($obj as $key => $value)
+            $items[$key] = $value;
+        $this->items = $items;
+        $storeClass = $this->get("store");
+        $this->store = new $storeClass($this);
+    }
+}

@@ -1,6 +1,13 @@
 <?php
     function error($error = "Not specified") {
         $msg = "Error: {$error}";
-        echo "<span class='error center-by-left'>{$msg}</span>";
+        if (DEBUG)
+            echo "<span class='error center-by-left'>{$msg}</span>";
         return $msg;
+    }
+
+    function pre($var) {
+        echo "<pre>";
+        var_dump($var);
+        echo "<pre>";
     }
