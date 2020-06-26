@@ -5,17 +5,22 @@ namespace Core;
 
 use App\Repositories\ClassesRepository;
 use Core\Cache\Abstracts\AbstractRepository;
-use Core\Essetials\System;
 
 class Application
 {
 
-    use System;
-
     /**
+     * Repository for classes
+     *
      * @var AbstractRepository
      */
     private $classes;
+    /**
+     * Application instance
+     *
+     * @var Application
+     */
+    private static $instance = null;
 
     public function __construct()
     {
@@ -27,17 +32,35 @@ class Application
         $this->registerClasses();
     }
 
+    public function print($message = "undefined print message")
+    {
+        echo "{$message}";
+        return $message;
+    }
+
     public function registerClasses()
     {
         $registrable = [
+            'app' => [self::class],
+            'app_instance' => [self::getInstance()],
             'db' => [\Core\Database\Database::class, \Core\Database\DB::class],
-            'request' => [\Core\Essetials\Request::class],
-            'url' => [\Core\Essetials\Url::class],
-            'file' => [\Core\Essetials\File::class],
-            'session' => [\Core\Essetials\Session::class],
+            'request' => [\Core\System\Request::class],
+            'url' => [\Core\System\Url::class],
+            'file' => [\Core\System\File::class],
+            'session' => [\Core\System\Session::class],
         ];
         $this->classes->setMultiple($registrable);
         $this->classes->save();
+        Shadowz::info("Repository '{repository}' loaded and saved", ["repository" => "classes.json"]);
+    }
+
+    public static function getInstance()
+    {
+        if (self::$instance == null || !self::$instance instanceof Application) {
+            self::$instance = new self();
+            self::$instance->setup();
+        }
+        return self::$instance;
     }
 
 }

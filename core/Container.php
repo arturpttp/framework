@@ -4,10 +4,8 @@
 namespace Core;
 
 
-use Core\Database\Database;
-use Core\Essetials\Controller;
-use Core\Essetials\Model;
-use Illuminate\Support\Facades\DB;
+use Core\Bases\Controller;
+use Core\Bases\Model;
 
 class Container
 {

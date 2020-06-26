@@ -5,10 +5,11 @@ namespace App\Controllers;
 
 
 use App\Models\UserModel;
-use Core\Essetials\Controller;
-use Core\Essetials\Request;
-use Core\Essetials\System;
-use Core\Essetials\Validator;
+use App\Repositories\UsersRepository;
+use Core\Bases\Controller;
+use Core\System\Request;
+use Core\System\System;
+use Core\System\Validator;
 use Core\User\User;
 
 class UserController extends Controller
@@ -22,8 +23,7 @@ class UserController extends Controller
 
     public function login()
     {
-        $userObj = new User($this->model);
-        $userObj->login('artur089', '123456');
+//        $userObj->changeLevel(1);
     }
 
     public function index() {
@@ -34,6 +34,14 @@ class UserController extends Controller
     {
         $this->setTitle("User Registration");
         $this->renderView("user/register");
+    }
+
+    public function profile($id)
+    {
+        if (!User::userExists($id))
+            return $this->addError("User with id {$id} doesn't exists");
+        $user = $this->model->getProfile($id);
+        $this->app->print($user->name);
     }
 
     public function registerSubmit($request)

@@ -1,10 +1,11 @@
 {
-  "name": "framework/fmwk",
-  "description": "A short description of what your package does",
+  "name": "shadowz/framework",
+  "description": "My framework",
   "require": {
     "php": "^7.2",
     "ext-pdo": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-intl": "*"
   },
   "autoload": {
     "psr-4": {

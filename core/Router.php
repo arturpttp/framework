@@ -5,21 +5,22 @@ namespace Core;
 
 
 use App\Models\UserModel;
-use Core\Essetials\Session;
-use Core\Essetials\System;
+use Core\System\Session;
 use Core\User\User;
+use stdClass;
 
 class Router
 {
 
-    private $routes;
-    private $uri;
-    private $app;
     public static $staticRoutes = [];
     public static $defaultInfos = [
         "auth" => false, //true if user need to be logged
         "level" => 0 //level to access the route User::$levels
     ];
+    public $controller, $controllerObj, $action, $params;
+    private $routes;
+    private $uri;
+    private $app;
 
     public function __construct($routes, $app)
     {
@@ -31,22 +32,14 @@ class Router
         $this->app = $app;
     }
 
-    public static function get($route, $data, $auth = false, $level = 0) {
-        $infos = [
-            "auth" => $auth,
-            "level" => $level
-        ];
-        $r = [$route, $data, $infos];
-        return self::$staticRoutes[] = $r;
-    }
-
-    private function routeNormalize($routes) {
+    private function routeNormalize($routes)
+    {
         $nRoutes = null;
         foreach ($routes as $route) {
             $explode = explode("@", $route[1]);
             if (isset($route[2])) {
                 $r = [$route[0], $explode[0], $explode[1], $route[2]];
-            }else {
+            } else {
                 $r = [$route[0], $explode[0], $explode[1], self::$defaultInfos];
             }
             $nRoutes[] = $r;
@@ -57,43 +50,38 @@ class Router
         return $this->routes;
     }
 
-    private function getRequest()
+    public static function get($route, $data, $auth = false, $level = 0)
     {
-        $obj = new \stdClass;
-
-        foreach ($_GET as $key => $value){
-            @$obj->get->$key = $value;
-        }
-
-        foreach ($_POST as $key => $value){
-            @$obj->post->$key = $value;
-        }
-
-        return $obj;
+        $infos = [
+            "auth" => $auth,
+            "level" => $level
+        ];
+        $r = [$route, $data, $infos];
+        return self::$staticRoutes[] = $r;
     }
 
-    public function getUrl()
-    {
-        return $this->uri;
-    }
-
+    /**
+     * initialization method for Router
+     */
     public function run()
     {
         $url = $this->getUrl();
         $urlArray = explode('/', $url);
-
+        $controller = null;
+        $param = null;
+        $action = null;
         foreach ($this->routes as $route) {
             $routeArray = explode('/', $route[0]);
             $param = [];
-            for($i = 0; $i < count($routeArray); $i++){
-                if((strpos($routeArray[$i], "{") !==false) && (count($urlArray) == count($routeArray))){
+            for ($i = 0; $i < count($routeArray); $i++) {
+                if ((strpos($routeArray[$i], "{") !== false) && (count($urlArray) == count($routeArray))) {
                     $routeArray[$i] = $urlArray[$i];
                     $param[] = $urlArray[$i];
                 }
-                $route[0] = implode($routeArray, '/');
+                $route[0] = implode('/', $routeArray);
             }
 
-            if($url == $route[0]){
+            if ($url == $route[0]) {
                 $found = true;
                 $controller = $route[1];
                 $action = $route[2];
@@ -108,15 +96,19 @@ class Router
             }
         }
 
-        if(isset($found)){
+        if (isset($found)) {
             $controllerName = $controller;
             $controller = Container::newController($controller);
-            $controller->app = $this->app;
+            $this->controller = $controllerName;
+            $this->controllerObj = $controller;
+            $this->action = $action;
+            $this->params = $param;
+
             if (!method_exists($controller, $action)) {
                 error("method {$action} not found in {$controllerName}");
                 die();
             }
-            switch (count($param)){
+            switch (count($param)) {
                 case 1:
                     $controller->$action($param[0], $this->getRequest());
                     break;
@@ -133,9 +125,39 @@ class Router
                     $controller->$action($this->getRequest());
                     break;
             }
-        }else{
+        } else {
             Container::pageNotFound();
         }
+    }
+
+    /**
+     * get url from the site
+     *
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->uri;
+    }
+
+    /**
+     * get request(post, get) for methods
+     *
+     * @return stdClass
+     */
+    private function getRequest()
+    {
+        $obj = new stdClass;
+
+        foreach ($_GET as $key => $value) {
+            @$obj->get->$key = $value;
+        }
+
+        foreach ($_POST as $key => $value) {
+            @$obj->post->$key = $value;
+        }
+
+        return $obj;
     }
 
 }

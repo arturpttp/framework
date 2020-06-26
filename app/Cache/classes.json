@@ -1,1 +1,1 @@
-{"store":"App\\Repositories\\Stores\\ClassesStore","db":["Core\\Database\\Database","Core\\Database\\DB"],"request":["Core\\Essetials\\Request"],"url":["Core\\Essetials\\Url"],"file":["Core\\Essetials\\File"],"session":["Core\\Essetials\\Session"]}
+{"store":"App\\Repositories\\Stores\\ClassesStore","app":["Core\\Application"],"app_instance":[{}],"db":["Core\\Database\\Database","Core\\Database\\DB"],"request":["Core\\System\\Request"],"url":["Core\\System\\Url"],"file":["Core\\System\\File"],"session":["Core\\System\\Session"]}

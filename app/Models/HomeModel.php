@@ -3,7 +3,7 @@
 
 namespace App\Models;
 
-use Core\Essetials\Model;
+use Core\Bases\Model;
 
 class HomeModel extends Model
 {

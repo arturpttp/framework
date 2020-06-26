@@ -7,7 +7,7 @@ namespace Core\Cache\Abstracts;
 use Closure;
 use Core\Cache\Repository;
 use Core\Cache\Store;
-use Core\Entities\StringUtils;
+use Core\Entities\Str;
 
 abstract class AbstractRepository extends AbstractCache implements Repository
 {
@@ -17,15 +17,18 @@ abstract class AbstractRepository extends AbstractCache implements Repository
      */
     private $store = null;
 
-    public function __construct(AbstractStore $store = null, $load = false)
+    public function __construct(AbstractStore $store = null, $load = true)
     {
         $this->store = $store;
         if ($store == null)
-            if ($load)
+            if ($load) {
+                $this->save();
                 $this->load();
+            }
             else
                 error("[{$store}] is undefined on class " . get_class($this));
         $this->set("store", get_class($store));
+        \Core\System\Repository::set($this->getFileName(), clone($this));
     }
 
     public function pull($key, $default = null)
@@ -35,12 +38,12 @@ abstract class AbstractRepository extends AbstractCache implements Repository
         return $value;
     }
 
-    public function put($key, $value)
+    public function put($key, $value = null)
     {
         $this->set($key, $value);
     }
 
-    public function add($key, $value)
+    public function add($key, $value = null)
     {
         if (!$this->has($key))
             $this->set($key, $value);
@@ -60,7 +63,7 @@ abstract class AbstractRepository extends AbstractCache implements Repository
         $this->set($key, $newValue);
     }
 
-    public function forever($key, $value)
+    public function forever($key, $value = null)
     {
         $this->set($key, $value);
     }
@@ -105,16 +108,16 @@ abstract class AbstractRepository extends AbstractCache implements Repository
     public function save()
     {
         $jsonString = json_encode($this->items);
-        $fileName = empty($this->getFileName()) || $this->getFileName() == "" ? $this->store->getPrefix() : $this->getFileName();
-        $fileName = (new StringUtils($fileName))->contains(".json") ? (new StringUtils($fileName))->replace(".json", "") : $fileName;
+        $fileName = resumeIf(empty($this->getFileName()) || $this->getFileName() == "", $this->store->getPrefix(), $this->getFileName());
+        $fileName = resumeIf((new Str($fileName))->contains(".json"), (new Str($fileName))->replace(".json", ""), $fileName);
         $file = fopen(CACHE_PATH . DS . "{$fileName}.json", "w+", false);
         fwrite($file, $jsonString);
     }
 
     public function load()
     {
-        $fileName = empty($this->getFileName()) || $this->getFileName() == "" ? $this->store->getPrefix() : $this->getFileName();
-        $fileName = (new StringUtils($fileName))->contains(".json") ? (new StringUtils($fileName))->replace(".json", "") : $fileName;
+        $fileName = resumeIf(empty($this->getFileName()) || $this->getFileName() == "", $this->store->getPrefix(), $this->getFileName());
+        $fileName = resumeIf((new Str($fileName))->contains(".json"), (new Str($fileName))->replace(".json", ""), $fileName);
         $filePath = CACHE_PATH . DS . "{$fileName}.json";
         $obj = json_decode(file_get_contents($filePath));
         $items = [];
@@ -124,4 +127,7 @@ abstract class AbstractRepository extends AbstractCache implements Repository
         $storeClass = $this->get("store");
         $this->store = new $storeClass($this);
     }
+
+    public abstract function getFileName();
+
 }

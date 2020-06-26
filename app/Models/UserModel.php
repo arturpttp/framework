@@ -4,7 +4,8 @@
 namespace App\Models;
 
 
-use Core\Essetials\Model;
+use Core\Bases\Model;
+use Core\User\User;
 
 class UserModel extends Model
 {
@@ -14,6 +15,11 @@ class UserModel extends Model
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function getProfile($id)
+    {
+        return User::get($id);
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 return new \Core\Config\Config([
-    "name" => "Framework",
+    "name" => "Shadowz",
     "author" => "ArturDev",
     "partners" => [
         "crunchyroll",

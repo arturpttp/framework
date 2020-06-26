@@ -18,7 +18,7 @@ abstract class AbstractCache implements CacheInterface
         return $this->items[$key];
     }
 
-    public function set($key, $value, $time = 0)
+    public function set($key, $value = null, $time = 0)
     {
         $this->items[$key] = $value;
     }

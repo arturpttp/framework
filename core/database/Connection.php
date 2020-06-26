@@ -24,7 +24,7 @@ class Connection implements Connectable
     /**
      * @var array
      */
-    public $items = [
+    private $items = [
         'driver' => 'mysql',
         'options' => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

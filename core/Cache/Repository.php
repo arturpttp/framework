@@ -9,11 +9,11 @@ interface Repository extends CacheInterface
 {
 
     public function pull($key, $default = null);
-    public function put($key, $value);
-    public function add($key, $value);
+    public function put($key, $value = null);
+    public function add($key, $value = null);
     public function increment($key, $value = 1);
     public function decrement($key, $value = 1);
-    public function forever($key, $value);
+    public function forever($key, $value = null);
     public function remember($key, Closure $callback);
     public function sear($key, Closure $callback);
     public function rememberForever($key, Closure $callback);
@@ -22,6 +22,4 @@ interface Repository extends CacheInterface
 
     public function save();
     public function load();
-
-    public function getFileName();
 }

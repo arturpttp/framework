@@ -4,9 +4,9 @@
 namespace Core\Database;
 
 
-use Core\Essetials\Request;
-use Core\Essetials\System;
-use Core\Essetials\Url;
+use Core\System\Request;
+use Core\System\System;
+use Core\System\Url;
 
 /**
  * Class DB

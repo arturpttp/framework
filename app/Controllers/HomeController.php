@@ -5,13 +5,8 @@ namespace App\Controllers;
 
 
 use App\Models\HomeModel;
-use App\Repositories\UsersRepository;
-use Core\Config\Config;
-use Core\Database\DB;
-use Core\Essetials\Controller;
-use Core\Essetials\File;
-use Core\Essetials\System;
-
+use CodeIgniter\Services;
+use Core\Bases\Controller;
 
 class HomeController extends Controller
 {
@@ -22,12 +17,10 @@ class HomeController extends Controller
         $this->model = new HomeModel();
     }
 
-    public function index() {
+    public function index()
+    {
     }
 
-    public function test()
-    {
-        echo "what";
-    }
+    public function test() {}
 
 }

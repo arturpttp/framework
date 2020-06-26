@@ -50,7 +50,6 @@ class Database extends Connection
                 foreach ($params as $param) {
                     $this->query->bindValue($x, $param);
                     $x++;
-                    $x++;
                 }
             }
             if ($this->result = $this->query->execute(!$a ? $params : null)) {

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9e201aad-9fe1-44f0-be05-1dc843675012" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1dj8sD7h4e26sklxinapbZDAeSC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/core" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Shadowz\core\Database\Schema" />
+      <recent name="C:\xampp\htdocs\Shadowz\core\Bases" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Shadowz\core" />
+      <recent name="C:\xampp\htdocs\Shadowz\app" />
+      <recent name="C:\xampp\htdocs\Shadowz\app\Views" />
+      <recent name="C:\xampp\htdocs\Shadowz\app\Repositories" />
+      <recent name="C:\xampp\htdocs\Shadowz\app\Models" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Shadowz" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$/public" port="8080">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9e201aad-9fe1-44f0-be05-1dc843675012" name="Default Changelist" comment="" />
+      <created>1592927346978</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592927346978</updated>
+      <workItem from="1592927349045" duration="1703000" />
+      <workItem from="1592963739572" duration="354000" />
+      <workItem from="1592964270141" duration="697000" />
+      <workItem from="1593000615317" duration="1111000" />
+      <workItem from="1593002142653" duration="9000" />
+      <workItem from="1593024985302" duration="360000" />
+      <workItem from="1593033683311" duration="1365000" />
+      <workItem from="1593042405306" duration="482000" />
+      <workItem from="1593048251101" duration="859000" />
+      <workItem from="1593088173368" duration="828000" />
+      <workItem from="1593093142507" duration="813000" />
+      <workItem from="1593129375506" duration="1115000" />
+      <workItem from="1593179353412" duration="121000" />
+      <workItem from="1593192000598" duration="725000" />
+      <workItem from="1593195934777" duration="1227000" />
+      <workItem from="1593204050283" duration="669000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.bat" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="300" y="105" key="#CLI_Interpreters" timestamp="1592929036794">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="300" y="105" key="#CLI_Interpreters/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1592929036794" />
+    <state x="363" y="5" key="#PHP" timestamp="1592929040326">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="363" y="5" key="#PHP/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1592929040326" />
+    <state x="437" y="139" key="#Shadowz" timestamp="1592929043172">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="437" y="139" key="#Shadowz/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1592929043172" />
+    <state x="174" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592929018221">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="174" y="105" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1592929018221" />
+    <state x="525" y="166" key="#com.intellij.ide.util.MemberChooser" timestamp="1593196662190">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="525" y="166" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593196662190" />
+    <state x="450" y="205" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1593196804608">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="450" y="205" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593196804608" />
+    <state width="1399" height="215" key="GridCell.Tab.0.bottom" timestamp="1593093957921">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1399" height="215" key="GridCell.Tab.0.bottom/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593093957921" />
+    <state width="1399" height="215" key="GridCell.Tab.0.center" timestamp="1593093957921">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1399" height="215" key="GridCell.Tab.0.center/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593093957921" />
+    <state width="1399" height="215" key="GridCell.Tab.0.left" timestamp="1593093957921">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1399" height="215" key="GridCell.Tab.0.left/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593093957921" />
+    <state width="1399" height="215" key="GridCell.Tab.0.right" timestamp="1593093957921">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1399" height="215" key="GridCell.Tab.0.right/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593093957921" />
+    <state x="512" y="250" key="NewPhpClassDialog" timestamp="1593197072344">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="512" y="250" key="NewPhpClassDialog/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593197072344" />
+    <state x="524" y="370" key="NewPhpFileDialog" timestamp="1592927692335">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="524" y="370" key="NewPhpFileDialog/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1592927692335" />
+    <state width="498" height="445" key="SwitcherDM" timestamp="1593025255950">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="498" height="445" key="SwitcherDM/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593025255950" />
+    <state x="403" y="165" width="681" height="550" key="find.popup" timestamp="1593034841171">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="403" y="165" width="681" height="550" key="find.popup/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593034841171" />
+    <state x="461" y="77" key="refactoring.ChangeSignatureDialog" timestamp="1592963959006">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="461" y="77" key="refactoring.ChangeSignatureDialog/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1592963959006" />
+    <state x="383" y="190" width="672" height="678" key="search.everywhere.popup" timestamp="1593197135520">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="383" y="190" width="672" height="678" key="search.everywhere.popup/0.0.1440.900/1440.0.1024.768@0.0.1440.900" timestamp="1593197135520" />
+  </component>
+</project>

@@ -5,9 +5,10 @@ namespace Core\User;
 
 
 use App\Models\UserModel;
-use Core\Essetials\Model;
-use Core\Essetials\Request;
-use Core\Essetials\Session;
+use Core\Container;
+use Core\Bases\Model;
+use Core\System\Request;
+use Core\System\Session;
 
 class User implements UserInterface
 {
@@ -20,6 +21,7 @@ class User implements UserInterface
     public $level;
     private $model;
     private static $logged = false;
+    private static $loggedUser = false;
     public static $levels = [
         "default" => '0',
         "user" => '1',
@@ -35,19 +37,36 @@ class User implements UserInterface
 
     function load(): User
     {
-        $query = $this->model->query("SELECT * FROM {$this->model->table} WHERE user=? AND password=?", [
-            'user' => $this->user,
-            'password' => $this->password
-        ], true);
+        $query = $this->model->find(['user' => $this->user, 'password' => $this->password]);
         $data = $query->first();
-        pre($data);
         $this->id = $data["id"];
         $this->name = $data["name"];
         $this->email = $data["email"];
         $this->password = $data["password"];
         $this->level = $data["level"];
         Session::set('loggedUser', $this->id);
+        self::$loggedUser = $this;
         return $this;
+    }
+
+    public static function get($id)
+    {
+        $model = new UserModel();
+        if (!$model->contains('id', $id))
+            return null;
+        $user = new User($model);
+        $data = $user->model->find(['id' => $id])->first();
+        $user->id = $data["id"];
+        $user->name = $data["name"];
+        $user->email = $data["email"];
+        $user->password = $data["password"];
+        $user->level = $data["level"];
+        return $user;
+    }
+
+    public static function userExists($id): bool
+    {
+        return resumeIf(self::get($id) == null, false, true);
     }
 
     public function exists(): bool
@@ -71,6 +90,8 @@ class User implements UserInterface
 
     public function changeLevel($level): User
     {
+        if ($this->level == $level)
+            return $this;
         $this->level = $level;
         $where = ['id' => $this->id];
         $data = ['level' => $level];
@@ -108,6 +129,16 @@ class User implements UserInterface
         $this->level = null;
         $this->model = new UserModel();
         static::$logged = false;
+        self::$loggedUser = false;
         return $this;
+    }
+
+    /**
+     * Returns logged user, or returns false if isn't user logged
+     *
+     * @return User|bool
+     */
+    public static function getLoggedUser() {
+        return self::$loggedUser;
     }
 }
